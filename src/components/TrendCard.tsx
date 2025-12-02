@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { TrendingUp, ArrowRight } from 'lucide-react';
-import { TrendItem } from '@/lib/naver-api';
+import { TrendItem } from '@/lib/google-trends';
 
 interface TrendCardProps {
     trends: TrendItem[];
