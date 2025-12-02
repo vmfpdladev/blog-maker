@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import googleTrends from 'google-trends-api';
+//import googleTrends from 'google-trends-api';
 
 export interface TrendItem {
     item: string;
@@ -12,17 +12,18 @@ export async function GET() {
 
         // Fetch daily trends for Korea
         // dailyTrends returns a Promise that resolves to a JSON string
-        const response = await googleTrends.dailyTrends({
-            geo: 'KR',
-        });
+        //const response = await googleTrends.dailyTrends({
+        //    geo: 'KR',
+        //});
 
-        const data = JSON.parse(response);
+        const data = JSON.parse('');
         console.log('Google Trends API response received');
 
         const trends: TrendItem[] = [];
 
         // Parse the response structure
         // default -> trendingSearchesDays -> [0] -> trendingSearches
+
         if (data.default && data.default.trendingSearchesDays && data.default.trendingSearchesDays.length > 0) {
             const dailyData = data.default.trendingSearchesDays[0];
             const trendingSearches = dailyData.trendingSearches;
