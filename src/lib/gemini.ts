@@ -17,19 +17,19 @@ export async function generateBlogPost(topic: string, type: 'informative' | 'cli
     }
 
     const prompt = `
-    Write a blog post about "${topic}".
+    Write a blog post about "${topic}" in Korean (한국어).
     Style: ${type === 'clickbait' ? 'Sensational, exciting, must-click' : 'Educational, detailed, professional'}.
     Structure:
-    - Catchy Title
+    - Catchy Title (in Korean)
     - Introduction
     - 3 Main Body Paragraphs
     - Conclusion
-    - 5 Relevant Hashtags
+    - 5 Relevant Hashtags (in Korean)
     
     Also analyze the content for SEO:
     - seoScore: Number 0-100 based on keyword usage, readability, and structure.
-    - seoAnalysis: A brief string explaining the score and suggesting improvements.
-    - keywords: Array of top 3-5 keywords used.
+    - seoAnalysis: A brief string explaining the score and suggesting improvements (in Korean).
+    - keywords: Array of top 3-5 keywords used (in Korean).
 
     Format the output as JSON with keys: title, content, hashtags (array of strings), seoScore (number), seoAnalysis (string), keywords (array of strings).
   `;
@@ -71,6 +71,7 @@ export async function generateDraftOptions(topic: string) {
     }
 
     const prompt = `Generate 2 distinct blog post angles for the topic "${topic}". 
+    Write in Korean (한국어).
     Return JSON array of objects with 'title' and 'description'.`;
 
     try {
