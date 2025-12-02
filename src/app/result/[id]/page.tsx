@@ -67,8 +67,8 @@ function ResultContent() {
                                 <button
                                     onClick={() => setThumbnailType('informative')}
                                     className={`p-3 rounded-lg text-sm font-medium transition-all ${thumbnailType === 'informative'
-                                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                                        : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                         }`}
                                 >
                                     Informative
@@ -76,8 +76,8 @@ function ResultContent() {
                                 <button
                                     onClick={() => setThumbnailType('clickbait')}
                                     className={`p-3 rounded-lg text-sm font-medium transition-all ${thumbnailType === 'clickbait'
-                                            ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
-                                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                        ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
+                                        : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                                         }`}
                                 >
                                     Click-bait
@@ -86,9 +86,9 @@ function ResultContent() {
                         </div>
 
                         <SEOScoreCard
-                            score={post.seoScore || 85}
-                            keywords={['AI', 'Tech', 'Future']}
-                            suggestions={['Add more internal links', 'Increase word count']}
+                            score={post.seoScore || 0}
+                            keywords={post.keywords || []}
+                            suggestions={[post.seoAnalysis || 'No analysis available']}
                         />
 
                         <div className="pt-6 border-t border-gray-800">

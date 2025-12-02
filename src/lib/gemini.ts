@@ -10,7 +10,9 @@ export async function generateBlogPost(topic: string, type: 'informative' | 'cli
             title: `[Mock] ${topic} - A Great Read`,
             content: `This is a mock blog post about ${topic}. Real generation requires an API key.`,
             hashtags: ['#mock', `#${topic.replace(/\s+/g, '')}`],
-            seoScore: 85
+            seoScore: 85,
+            seoAnalysis: 'This is a mock analysis. Add an API key for real insights.',
+            keywords: ['mock', 'data']
         };
     }
 
@@ -24,7 +26,12 @@ export async function generateBlogPost(topic: string, type: 'informative' | 'cli
     - Conclusion
     - 5 Relevant Hashtags
     
-    Format the output as JSON with keys: title, content, hashtags (array of strings).
+    Also analyze the content for SEO:
+    - seoScore: Number 0-100 based on keyword usage, readability, and structure.
+    - seoAnalysis: A brief string explaining the score and suggesting improvements.
+    - keywords: Array of top 3-5 keywords used.
+
+    Format the output as JSON with keys: title, content, hashtags (array of strings), seoScore (number), seoAnalysis (string), keywords (array of strings).
   `;
 
     try {
@@ -40,7 +47,14 @@ export async function generateBlogPost(topic: string, type: 'informative' | 'cli
         if (jsonMatch) {
             return JSON.parse(jsonMatch[0]);
         }
-        return { title: `Post about ${topic}`, content: text, hashtags: [] };
+        return {
+            title: `Post about ${topic}`,
+            content: text,
+            hashtags: [],
+            seoScore: 70,
+            seoAnalysis: 'Could not parse SEO analysis.',
+            keywords: []
+        };
     } catch (error) {
         console.error('Gemini generation error:', error);
         throw error;
