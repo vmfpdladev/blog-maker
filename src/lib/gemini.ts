@@ -14,7 +14,7 @@ interface ParagraphWithImage {
 async function fetchUnsplashImage(query: string): Promise<string | null> {
     if (!UNSPLASH_ACCESS_KEY) {
         // Return placeholder if no API key
-        return `https://source.unsplash.com/800x600/?${encodeURIComponent(query)}`;
+        return `https://image.pollinations.ai/prompt/${encodeURIComponent(query)}?width=800&height=600&nologo=true`;
     }
 
     try {
@@ -29,7 +29,7 @@ async function fetchUnsplashImage(query: string): Promise<string | null> {
 
         if (!response.ok) {
             // Fallback to placeholder
-            return `https://source.unsplash.com/800x600/?${encodeURIComponent(query)}`;
+            return `https://image.pollinations.ai/prompt/${encodeURIComponent(query)}?width=800&height=600&nologo=true`;
         }
 
         const data = await response.json();
@@ -41,7 +41,7 @@ async function fetchUnsplashImage(query: string): Promise<string | null> {
     }
 
     // Fallback to placeholder
-    return `https://source.unsplash.com/800x600/?${encodeURIComponent(query)}`;
+    return `https://image.pollinations.ai/prompt/${encodeURIComponent(query)}?width=800&height=600&nologo=true`;
 }
 
 async function generateImageQueries(content: string, topic: string): Promise<string[]> {
@@ -122,7 +122,7 @@ export async function generateBlogPost(topic: string, type: 'informative' | 'cli
         // Simple parsing (in production, use structured output or robust JSON parser)
         const jsonMatch = text.match(/\{[\s\S]*\}/);
         let postData;
-        
+
         if (jsonMatch) {
             postData = JSON.parse(jsonMatch[0]);
         } else {
@@ -152,7 +152,7 @@ export async function generateBlogPost(topic: string, type: 'informative' | 'cli
         for (let i = 0; i < postData.paragraphs.length; i++) {
             const paragraph = postData.paragraphs[i];
             const imageQuery = imageQueries[i % imageQueries.length] || topic;
-            
+
             // Fetch image for every other paragraph (or every paragraph if less than 3)
             if (i === 0 || i % 2 === 0 || postData.paragraphs.length < 3) {
                 const imageUrl = await fetchUnsplashImage(imageQuery);

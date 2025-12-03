@@ -57,6 +57,7 @@ export async function GET() {
         }
 
         const responseText = await response.text();
+        console.log('[API] Response received :', responseText);
         console.log('[API] Response received, length:', responseText.length);
 
         // The response starts with ")]}'" which we need to remove

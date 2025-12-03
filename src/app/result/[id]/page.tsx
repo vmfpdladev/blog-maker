@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Share2, Download, Copy, Check, Twitter, Facebook } from 'lucide-react';
 import SEOScoreCard from '@/components/SEOScoreCard';
+import ImageWithLoading from '@/components/ImageWithLoading';
 import { generateBlogPost } from '@/lib/gemini';
 
 function ResultContent() {
@@ -28,7 +29,7 @@ function ResultContent() {
                 // Use the selected title if available, otherwise topic
                 const data = await generateBlogPost(title || topic!, thumbnailType);
                 setPost(data);
-                
+
                 // Generate shareable URL
                 const currentUrl = window.location.href;
                 setShareUrl(currentUrl);
@@ -54,7 +55,7 @@ function ResultContent() {
     const handleShare = (platform: 'twitter' | 'facebook') => {
         const url = encodeURIComponent(shareUrl || window.location.href);
         const text = encodeURIComponent(post?.title || '');
-        
+
         if (platform === 'twitter') {
             window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         } else if (platform === 'facebook') {
@@ -123,10 +124,10 @@ function ResultContent() {
                                 <Download className="w-4 h-4" />
                                 Export Markdown
                             </button>
-                            
+
                             <div className="space-y-2">
                                 <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Share Article</h3>
-                                
+
                                 <button
                                     onClick={handleCopyLink}
                                     className="w-full flex items-center justify-center gap-2 bg-gray-800 text-white font-medium py-3 rounded-xl hover:bg-gray-700 transition-colors"
@@ -143,7 +144,7 @@ function ResultContent() {
                                         </>
                                     )}
                                 </button>
-                                
+
                                 <div className="grid grid-cols-2 gap-2">
                                     <button
                                         onClick={() => handleShare('twitter')}
@@ -196,11 +197,9 @@ function ResultContent() {
                                                     transition={{ delay: index * 0.1 }}
                                                     className="w-full rounded-lg overflow-hidden my-6"
                                                 >
-                                                    <img
+                                                    <ImageWithLoading
                                                         src={paragraph.imageUrl}
                                                         alt={paragraph.imageDescription || post.title}
-                                                        className="w-full h-auto object-cover"
-                                                        loading="lazy"
                                                     />
                                                 </motion.div>
                                             )}
