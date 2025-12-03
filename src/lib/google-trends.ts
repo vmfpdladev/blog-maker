@@ -1,6 +1,9 @@
 export interface TrendItem {
     item: string;
     rank: number;
+    traffic?: string;
+    link?: string;
+    pubDate?: string;
 }
 
 export async function getDailyTrends(): Promise<TrendItem[]> {
